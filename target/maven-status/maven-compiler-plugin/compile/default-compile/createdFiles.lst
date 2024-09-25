@@ -1,0 +1,5 @@
+com\example\COMPARAR\BINARIOS\CompararBinariosApplication.class
+com\example\COMPARAR\BINARIOS\config.class
+com\example\COMPARAR\BINARIOS\BinaryComparisonController$BinaryResponse.class
+com\example\COMPARAR\BINARIOS\BinaryComparisonController.class
+com\example\COMPARAR\BINARIOS\BinaryComparisonController$BinaryRequest.class
