@@ -8,9 +8,9 @@ public class config implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/**")
-                .allowedOrigins("https://comparador-binarios-ang.vercel.app", "https://comparador-binarios-c8osfvtrg-joseleonorf7s-projects.vercel.app") // Ambas URLs
-                .allowedMethods("GET", "POST", "PUT", "DELETE")
+        registry.addMapping("/**")  // Permitir todas las rutas
+                .allowedOrigins("https://comparador-binarios-ang.vercel.app", "https://comparador-binarios-c8osfvtrg-joseleonorf7s-projects.vercel.app")
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Asegúrate de incluir OPTIONS
                 .allowedHeaders("*")
                 .allowCredentials(true);
     }
