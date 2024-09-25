@@ -8,10 +8,10 @@ public class config implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("https://comparador-binarios-ang.vercel.app") // Permite la URL de tu frontend
-                .allowedMethods("GET", "POST", "PUT", "DELETE")
-                .allowedHeaders("*");
+        registry.addMapping("/api/**") // Permitir CORS solo para los endpoints que empiezan con /api
+                .allowedOrigins("https://comparador-binarios-ang.vercel.app") // La URL de tu frontend
+                .allowedMethods("GET", "POST", "PUT", "DELETE") // Métodos permitidos
+                .allowedHeaders("*") // Permitir todos los encabezados
+                .allowCredentials(true); // Permitir el uso de credenciales (si es necesario)
     }
-
 }
