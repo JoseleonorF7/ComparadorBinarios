@@ -9,7 +9,7 @@ public class config implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("https://comparadorbinarios-1.onrender.com")
+                .allowedOrigins("https://comparador-binarios-ang.vercel.app") // Permite la URL de tu frontend
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*");
     }
