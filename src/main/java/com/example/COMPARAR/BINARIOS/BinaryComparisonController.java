@@ -54,7 +54,6 @@ public class BinaryComparisonController {
         }
     }
 
-    @CrossOrigin(origins = "https://comparador-binarios-ang.vercel.app") // Agrega CORS a nivel de método
     @PostMapping("/compare")
     public ResponseEntity<Map<String, Object>> compareBinaries(@RequestBody BinaryRequest request) {
         String binaryA = request.getBinaryA();
