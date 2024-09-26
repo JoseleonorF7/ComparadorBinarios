@@ -1,10 +1,11 @@
 package com.example.COMPARAR.BINARIOS;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.lang.model.util.Elements;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,6 +56,7 @@ public class BinaryComparisonController {
         }
     }
 
+    // Método principal para comparar los binarios
     @PostMapping("/compare")
     public ResponseEntity<Map<String, Object>> compareBinaries(@RequestBody BinaryRequest request) {
         String binaryA = request.getBinaryA();
@@ -82,10 +84,21 @@ public class BinaryComparisonController {
         return ResponseEntity.ok(response);
     }
 
+    // Método para manejar solicitudes OPTIONS (Preflight request)
+    @RequestMapping(value = "/compare", method = RequestMethod.OPTIONS)
+    public ResponseEntity<Void> handleOptionsRequest() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Allow", "POST,OPTIONS");
+        headers.add("Access-Control-Allow-Origin", "*");
+        headers.add("Access-Control-Allow-Methods", "POST,OPTIONS");
+        headers.add("Access-Control-Allow-Headers", "Content-Type");
+
+        return new ResponseEntity<>(headers, HttpStatus.OK);
+    }
+
     // Método para manejar excepciones globalmente
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<Map<String, String>> handleIllegalArgumentException(IllegalArgumentException ex) {
-        // Manejo de errores personalizados
         Map<String, String> errorResponse = new HashMap<>();
         errorResponse.put("error", ex.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
@@ -93,7 +106,6 @@ public class BinaryComparisonController {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, String>> handleGeneralException(Exception ex) {
-        // Manejo de errores generales
         Map<String, String> errorResponse = new HashMap<>();
         errorResponse.put("error", "An unexpected error occurred. Please try again.");
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
