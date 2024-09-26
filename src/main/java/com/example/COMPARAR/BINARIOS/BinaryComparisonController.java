@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@CrossOrigin(origins = {"https://comparador-binarios-ang.vercel.app","https://comparador-binarios-c8osfvtrg-joseleonorf7s-projects.vercel.app"})
 @RestController
 @RequestMapping("/api")
 public class BinaryComparisonController {
