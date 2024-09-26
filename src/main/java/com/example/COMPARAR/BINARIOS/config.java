@@ -8,9 +8,12 @@ public class config implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**") // Ajusta si quieres restringir a rutas específicas
-                .allowedOrigins("https://comparador-binarios-ang.vercel.app") // Agrega tu dominio de Angular
-                .allowedMethods("GET", "POST", "PUT", "DELETE") // Métodos permitidos
-                .allowedHeaders("*") // Puedes restringir si es necesario
+        registry.addMapping("/**")
+                .allowedOrigins("*") // Permite cualquier origen
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedHeaders("*")
                 .allowCredentials(true);
-    }}
+    }
+
+
+}

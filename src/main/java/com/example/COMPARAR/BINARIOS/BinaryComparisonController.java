@@ -2,11 +2,7 @@ package com.example.COMPARAR.BINARIOS;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -58,6 +54,7 @@ public class BinaryComparisonController {
         }
     }
 
+    @CrossOrigin(origins = "https://comparador-binarios-ang.vercel.app") // Agrega CORS a nivel de método
     @PostMapping("/compare")
     public ResponseEntity<Map<String, Object>> compareBinaries(@RequestBody BinaryRequest request) {
         String binaryA = request.getBinaryA();
