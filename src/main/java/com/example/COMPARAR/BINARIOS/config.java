@@ -15,5 +15,4 @@ public class config implements WebMvcConfigurer {
                 .allowCredentials(true);
     }
 
-
 }
