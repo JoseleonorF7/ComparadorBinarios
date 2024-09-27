@@ -102,18 +102,18 @@ public class BinaryComparisonController {
     }
 
 
-    // Método para manejar solicitudes OPTIONS (Preflight request)
     @RequestMapping(value = "/compare", method = RequestMethod.OPTIONS)
     public ResponseEntity<Void> handleOptionsRequest() {
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Allow", "POST,OPTIONS");
-        headers.add("Access-Control-Allow-Origin", "https://comparador-binarios-ang.vercel.app");
-        headers.add("Access-Control-Allow-Methods", "POST,OPTIONS");
+        headers.add("Allow", "POST, OPTIONS");
+        headers.add("Access-Control-Allow-Origin", "https://comparador-binarios-ang.vercel.app");  // Especifica el origen de tu frontend
+        headers.add("Access-Control-Allow-Methods", "POST, OPTIONS");
         headers.add("Access-Control-Allow-Headers", "Content-Type");
         headers.add("Access-Control-Allow-Credentials", "true");
 
         return new ResponseEntity<>(headers, HttpStatus.OK);
     }
+
 
 
     // Método para manejar excepciones globalmente
