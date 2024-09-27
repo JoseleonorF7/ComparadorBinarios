@@ -62,14 +62,24 @@ public class BinaryComparisonController {
         String binaryA = request.getBinaryA();
         String binaryB = request.getBinaryB();
 
-        // Validación de longitud de los binarios
-        if (binaryA.length() != 128 || binaryB.length() != 128) {
-            throw new IllegalArgumentException("Both binary patterns must have exactly 128 bits");
+        List<String> validationErrors = new ArrayList<>();
+
+        if (binaryA.length() != 128) {
+            validationErrors.add("Binary A has " + binaryA.length() + " bits instead of 128.");
+        }
+
+        if (binaryB.length() != 128) {
+            validationErrors.add("Binary B has " + binaryB.length() + " bits instead of 128.");
+        }
+
+        if (!validationErrors.isEmpty()) {
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("errors", validationErrors);
+            return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
         }
 
         List<Integer> differingPositions = new ArrayList<>();
 
-        // Comparar los bits y guardar las posiciones donde son diferentes
         for (int i = 0; i < 128; i++) {
             if (binaryA.charAt(i) != binaryB.charAt(i)) {
                 differingPositions.add(i);
@@ -80,6 +90,11 @@ public class BinaryComparisonController {
         response.put("binaryA", binaryA);
         response.put("binaryB", binaryB);
         response.put("differingPositions", differingPositions);
+
+        // Agregar mensaje si no hay diferencias
+        if (differingPositions.isEmpty()) {
+            response.put("message", "No differences found between the binaries.");
+        }
 
         return ResponseEntity.ok(response);
     }

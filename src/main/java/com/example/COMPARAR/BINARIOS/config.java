@@ -10,7 +10,7 @@ public class config implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")  // Asegúrate de que el mapeo es correcto
                 .allowedOrigins("https://comparador-binarios-ang.vercel.app",
-                        "https://comparador-binarios-c8osfvtrg-joseleonorf7s-projects.vercel.app")
+                        "https://comparador-binarios-c8osfvtrg-joseleonorf7s-projects.vercel.app","http://localhost:4200")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")  // Asegúrate de que todos los métodos están permitidos
                 .allowedHeaders("*")  // Permite todos los encabezados
                 .exposedHeaders("Access-Control-Allow-Origin")  // Exponer el encabezado necesario
