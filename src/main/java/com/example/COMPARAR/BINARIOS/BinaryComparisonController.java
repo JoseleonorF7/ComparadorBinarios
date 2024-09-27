@@ -59,9 +59,12 @@ public class BinaryComparisonController {
     // Método principal para comparar los binarios
     @PostMapping("/compare")
     public ResponseEntity<Map<String, Object>> compareBinaries(@RequestBody BinaryRequest request) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Access-Control-Allow-Origin", "https://comparador-binarios-ang.vercel.app");
+        headers.add("Access-Control-Allow-Credentials", "true");
+
         String binaryA = request.getBinaryA();
         String binaryB = request.getBinaryB();
-
         List<String> validationErrors = new ArrayList<>();
 
         if (binaryA.length() != 128) {
@@ -75,7 +78,7 @@ public class BinaryComparisonController {
         if (!validationErrors.isEmpty()) {
             Map<String, Object> errorResponse = new HashMap<>();
             errorResponse.put("errors", validationErrors);
-            return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(errorResponse, headers, HttpStatus.BAD_REQUEST);
         }
 
         List<Integer> differingPositions = new ArrayList<>();
@@ -91,25 +94,27 @@ public class BinaryComparisonController {
         response.put("binaryB", binaryB);
         response.put("differingPositions", differingPositions);
 
-        // Agregar mensaje si no hay diferencias
         if (differingPositions.isEmpty()) {
             response.put("message", "No differences found between the binaries.");
         }
 
-        return ResponseEntity.ok(response);
+        return new ResponseEntity<>(response, headers, HttpStatus.OK);
     }
+
 
     // Método para manejar solicitudes OPTIONS (Preflight request)
     @RequestMapping(value = "/compare", method = RequestMethod.OPTIONS)
     public ResponseEntity<Void> handleOptionsRequest() {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Allow", "POST,OPTIONS");
-        headers.add("Access-Control-Allow-Origin", "*");
+        headers.add("Access-Control-Allow-Origin", "https://comparador-binarios-ang.vercel.app");
         headers.add("Access-Control-Allow-Methods", "POST,OPTIONS");
         headers.add("Access-Control-Allow-Headers", "Content-Type");
+        headers.add("Access-Control-Allow-Credentials", "true");
 
         return new ResponseEntity<>(headers, HttpStatus.OK);
     }
+
 
     // Método para manejar excepciones globalmente
     @ExceptionHandler(IllegalArgumentException.class)
